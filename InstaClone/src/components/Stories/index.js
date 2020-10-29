@@ -33,13 +33,14 @@ const data = [
 ];
 export default function Stories() {
   return (
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={data}
         keyExtractor={(data) => data.id.toString()}
         renderItem={({item}) => (
           <Story imageUri={item.imageUri} name={item.name} />
         )}
+        style={styles.container}
         horizontal
         showsHorizontalScrollIndicator={false}
       />

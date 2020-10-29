@@ -1,12 +1,8 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Image, View} from 'react-native';
 
 import styles from './styles';
 
-export default function Body() {
-  return (
-    <View>
-      <Text>Body</Text>
-    </View>
-  );
+export default function Body({imageUri}) {
+  return <Image source={{uri: imageUri}} style={styles.image} />;
 }
