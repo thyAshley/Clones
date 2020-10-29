@@ -1,8 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, ScrollView, StatusBar} from 'react-native';
-
-import ProfilePicture from './src/components/ProfilePicture';
-import Stories from './src/components/Stories';
+import {StatusBar} from 'react-native';
 
 import HomeScreen from './src/screens/HomeScreen';
 
@@ -11,11 +8,8 @@ const App = () => {
     <>
       <StatusBar />
       <HomeScreen />
-      <Stories />
     </>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default App;

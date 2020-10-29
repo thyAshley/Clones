@@ -1,6 +1,7 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, View} from 'react-native';
 
+import styles from './styles';
 import Story from '../Story';
 
 const data = [
@@ -32,14 +33,16 @@ const data = [
 ];
 export default function Stories() {
   return (
-    <FlatList
-      data={data}
-      keyExtractor={(data) => data.id}
-      renderItem={({item}) => (
-        <Story imageUri={item.imageUri} name={item.name} />
-      )}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-    />
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        keyExtractor={(data) => data.id.toString()}
+        renderItem={({item}) => (
+          <Story imageUri={item.imageUri} name={item.name} />
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
+    </View>
   );
 }

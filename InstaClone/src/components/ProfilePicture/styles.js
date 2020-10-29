@@ -11,15 +11,11 @@ const styles = StyleSheet.create({
     borderBottomColor: 'darkorange',
     borderLeftColor: 'darkorange',
     borderWidth: 1.5,
-    height: 76,
-    width: 76,
     alignItems: 'center',
     justifyContent: 'center',
   },
   imageStyle: {
     borderRadius: 40,
-    height: 70,
-    width: 70,
   },
 });
 

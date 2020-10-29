@@ -3,11 +3,14 @@ import {Image, View} from 'react-native';
 
 import styles from './styles';
 
-export default function ProfilePicture({imageUri}) {
+export default function ProfilePicture({imageUri, size = 70}) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {width: size + 6, height: size + 6}]}>
       <View style={styles.imageBorder}>
-        <Image style={styles.imageStyle} source={{uri: imageUri}} />
+        <Image
+          style={[styles.imageStyle, {width: size, height: size}]}
+          source={{uri: imageUri}}
+        />
       </View>
     </View>
   );
