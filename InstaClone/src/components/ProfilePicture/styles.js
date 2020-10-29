@@ -2,26 +2,24 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    margin: 10,
   },
   imageBorder: {
-    borderRadius: 45,
+    borderRadius: 38,
     borderTopColor: 'tomato',
     borderRightColor: 'tomato',
     borderBottomColor: 'darkorange',
     borderLeftColor: 'darkorange',
-    borderWidth: 2,
-    height: 90,
-    width: 90,
-    padding: 10,
-    overflow: 'hidden',
+    borderWidth: 1.5,
+    height: 76,
+    width: 76,
     alignItems: 'center',
     justifyContent: 'center',
   },
   imageStyle: {
     borderRadius: 40,
-    height: 80,
-    width: 80,
+    height: 70,
+    width: 70,
   },
 });
 
