@@ -8,6 +8,7 @@ import {
   Title,
   SubTitle,
   Image,
+  Item,
 } from "./styles/jumbotron";
 
 const Jumbotron: React.FC<JumbotronProps> & JumbotronComposition = ({
@@ -16,9 +17,11 @@ const Jumbotron: React.FC<JumbotronProps> & JumbotronComposition = ({
   ...restProps
 }) => {
   return (
-    <Inner {...restProps} direction={direction}>
-      {children}
-    </Inner>
+    <Item>
+      <Inner direction={direction} {...restProps}>
+        {children}
+      </Inner>
+    </Item>
   );
 };
 
