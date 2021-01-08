@@ -1,12 +1,11 @@
 import React from "react";
-import { Route, Redirect, RouterProps, RouteProps } from "react-router-dom";
+import { Route, Redirect, RouteProps } from "react-router-dom";
 import Firebase from "firebase";
 
 export const IsUserRedirect: React.FC<{
   user: Firebase.User | null;
   loggedInPath: string;
 }> = ({ user, loggedInPath, children, ...restProps }) => {
-  console.log(user);
   return (
     <Route
       {...restProps}
@@ -32,7 +31,6 @@ export const ProtectedRoute: React.FC<
     <Route
       {...restProps}
       render={({ location }) => {
-        console.log(location);
         if (user) {
           return children;
         }
