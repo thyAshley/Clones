@@ -8,7 +8,7 @@ import { FirebaseContext } from "../context/firebase";
 
 import * as ROUTES from "../constant/routes";
 
-const Signin = () => {
+const Signin: React.FC = () => {
   const history = useHistory();
   const firebase = useContext(FirebaseContext);
   const [email, setEmail] = useState<string>("");
