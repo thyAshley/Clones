@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import * as ROUTES from "./constant/routes";
-
 import { Home, Browse, Signin, Signup } from "./pages";
 
 function App() {
