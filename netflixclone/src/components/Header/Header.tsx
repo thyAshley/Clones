@@ -2,7 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { HeaderComposition, HeaderProps } from "./header.types";
-import { Background, Container, Logo, ButtonLink } from "./styles";
+import {
+  Background,
+  Container,
+  Logo,
+  ButtonLink,
+  Feature,
+  Text,
+  FeatureCallOut,
+} from "./styles";
 
 const Header: React.FC<HeaderProps> & HeaderComposition = ({
   bg = true,
@@ -14,6 +22,20 @@ const Header: React.FC<HeaderProps> & HeaderComposition = ({
 
 Header.Frame = function HeaderFrame({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
+};
+
+Header.FeatureCallOut = function HeaderFeatureCallOut({
+  children,
+  ...restProps
+}) {
+  return <FeatureCallOut {...restProps}>{children}</FeatureCallOut>;
+};
+Header.Text = function HeaderText({ children, ...restProps }) {
+  return <Text {...restProps}>{children}</Text>;
+};
+
+Header.Feature = function HeaderFeature({ children, ...restProps }) {
+  return <Feature {...restProps}>{children}</Feature>;
 };
 
 Header.Logo = function HeaderLogo({ to, ...restProps }) {
