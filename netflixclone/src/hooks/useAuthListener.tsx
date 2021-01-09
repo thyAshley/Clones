@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import Firebase from "firebase";
 
 import { FirebaseContext } from "../context/firebase";
@@ -21,6 +21,7 @@ const useAuthListener = () => {
       }
     });
     return () => listener();
+    // eslint-disable-next-line
   }, []);
 
   return { user };
