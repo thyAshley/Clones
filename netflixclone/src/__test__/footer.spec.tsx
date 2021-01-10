@@ -4,9 +4,7 @@ import FooterContainer from "../containers/FooterContainer";
 
 describe("<Footer/>", () => {
   it("should render the footer with populated data", () => {
-    const { container, getByText, queryByTestId, getAllByRole } = render(
-      <FooterContainer />
-    );
+    const { getByText, getAllByRole } = render(<FooterContainer />);
     expect(getByText("Questions? Contact us.")).toBeTruthy();
     expect(getByText("Help Centre")).toBeTruthy();
     expect(getByText("Account")).toBeTruthy();
