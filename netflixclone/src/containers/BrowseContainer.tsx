@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import Fuse from "fuse.js";
 
 import { FirebaseContext } from "../context/firebase";
 import Loading from "../components/Loading";
@@ -7,9 +8,7 @@ import { SlideAttribute } from "./BrowseContainer.types";
 import ProfileContainer from "./ProfileContainer";
 import * as ROUTES from "../constant/routes";
 import logo from "./logo.svg";
-import { NavLink } from "react-router-dom";
 import Card from "../components/Card";
-import { isPartiallyEmittedExpression } from "typescript";
 import FooterContainer from "./FooterContainer";
 import Player from "../components/Player";
 
@@ -32,6 +31,18 @@ const BrowseContainer: React.FC<SlideAttribute> = ({ slides }) => {
   useEffect(() => {
     setSlideRows(slides[category]);
   }, [slides, category]);
+
+  useEffect(() => {
+    const fuse = new Fuse(slidesRows, {
+      keys: ["data.description", "data.title", "data.genre"],
+    });
+    const results = fuse.search(searchTerm).map(({ item }) => item);
+    if (slidesRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+      setSlideRows(results);
+    } else {
+      setSlideRows(slides[category]);
+    }
+  }, [searchTerm]);
 
   return profile.displayName ? (
     <>
@@ -106,7 +117,7 @@ const BrowseContainer: React.FC<SlideAttribute> = ({ slides }) => {
             <Card.Feature category={category}>
               <Player>
                 <Player.Button />
-                <Player.Video src="/src/" />
+                <Player.Video src="/videos/bunny.mp4" />
               </Player>
             </Card.Feature>
           </Card>

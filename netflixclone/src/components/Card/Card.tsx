@@ -57,6 +57,7 @@ Card.Image = function CardImage({ ...restProps }) {
 };
 Card.Item = function CardGroup({ item, children, ...restProps }) {
   const { setShowFeature, setItemFeature } = useContext(FeatureContext);
+  console.log(item);
   return (
     <Item
       onClick={() => {
