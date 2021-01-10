@@ -81,9 +81,14 @@ Header.Group = function HeaderGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
 };
 
-Header.TextLink = function HeaderTextLink({ active, children, ...restProps }) {
+Header.TextLink = function HeaderTextLink({
+  onClick,
+  active,
+  children,
+  ...restProps
+}) {
   return (
-    <TextLink active={active ? active : ""} {...restProps}>
+    <TextLink onClick={onClick} active={active ? active : ""} {...restProps}>
       {children}
     </TextLink>
   );

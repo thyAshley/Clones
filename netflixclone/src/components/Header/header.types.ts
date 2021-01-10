@@ -4,6 +4,7 @@ export interface Link {
 }
 export interface TextLink {
   active?: string;
+  onClick?: any;
 }
 
 export interface SearchProps {
