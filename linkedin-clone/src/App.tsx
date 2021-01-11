@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { Header, Sidebar } from "./components";
 
 function App() {
