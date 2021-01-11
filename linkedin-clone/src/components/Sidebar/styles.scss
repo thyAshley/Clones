@@ -18,14 +18,49 @@
     padding-bottom: 10px;
 
     .sidebar__avatar {
+      border: 2px white solid;
       object-fit: contain;
-      width: 30px;
-      height: 30px;
-      margin-top: -15px;
+      width: 45px;
+      height: 45px;
+      margin-top: -20px;
     }
 
     img {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      height: 60px;
       width: 100%;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+    }
+
+    h4 {
+      color: gray;
+      font-size: 0.7rem;
+    }
+  }
+  .sidebar__stats {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    background: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    .sidebar__stat {
+      color: gray;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+
+      .sidebar__statNumber {
+        font-weight: bold;
+        color: #0a66c2;
+      }
     }
   }
 }
