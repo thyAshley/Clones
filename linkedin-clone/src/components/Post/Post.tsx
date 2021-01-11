@@ -1,4 +1,11 @@
 import { Avatar } from "@material-ui/core";
+import {
+  ChatOutlined,
+  SendOutlined,
+  ShareOutlined,
+  ThumbUpAltOutlined,
+} from "@material-ui/icons";
+import InputOption from "../InputOption/InputOption";
 
 import "./styles.scss";
 import { PostProps } from "./types";
@@ -21,6 +28,13 @@ const Post: React.FC<PostProps> = ({
 
       <div className="post__body">
         <p>{message}</p>
+      </div>
+
+      <div className="post__buttons">
+        <InputOption Icon={ThumbUpAltOutlined} title="Like" color="gray" />
+        <InputOption Icon={ChatOutlined} title="Comment" color="gray" />
+        <InputOption Icon={ShareOutlined} title="Share" color="gray" />
+        <InputOption Icon={SendOutlined} title="Send" color="gray" />
       </div>
     </div>
   );

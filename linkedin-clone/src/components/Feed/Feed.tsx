@@ -1,3 +1,5 @@
+import { useState, useEffect, useRef } from "react";
+import firebase from "firebase";
 import {
   Create,
   Image,
@@ -10,16 +12,52 @@ import "./styles.scss";
 
 import InputOption from "../InputOption/InputOption";
 import Post from "../Post/Post";
+import { db } from "../db";
+import { postAttribute } from "./post_types";
 
 const Feed = () => {
+  const [posts, setPosts] = useState<postAttribute[]>([]);
+  const [text, setText] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) =>
+      setPosts(
+        snapshot.docs.map((doc: any) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      )
+    );
+  }, []);
+
+  const sendPost = (e: React.MouseEvent) => {
+    e.preventDefault();
+    db.collection("posts").add({
+      name: "Tester",
+      description: "This is a test",
+      message: text,
+      photoURL: "Test",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    setText("");
+  };
+
   return (
     <div className="feed">
       <div className="feed__inputContainer">
-        <div className="feed__input">
+        <div className="feed__input" onClick={() => inputRef.current?.focus()}>
           <Create />
           <form>
-            <input type="text" />
-            <button type="submit">Send</button>
+            <input
+              ref={inputRef}
+              type="text"
+              onChange={({ target }) => setText(target.value)}
+              value={text}
+            />
+            <button onClick={sendPost} type="submit">
+              Send
+            </button>
           </form>
         </div>
         <div className="feed__inputOptions">
@@ -33,12 +71,17 @@ const Feed = () => {
           />
         </div>
       </div>
-      <Post
-        name="tester"
-        description="This is a test"
-        message="Test message"
-        photoURL="test"
-      />
+      {posts.map(({ id, data }) => {
+        return (
+          <Post
+            key={id}
+            name={data.name}
+            description={data.description}
+            message={data.message}
+            photoURL={data.photoURL}
+          />
+        );
+      })}
     </div>
   );
 };
