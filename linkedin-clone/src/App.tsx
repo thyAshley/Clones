@@ -1,5 +1,5 @@
 import "./App.scss";
-import { Header, Sidebar } from "./components";
+import { Header, Sidebar, Feed, Widget } from "./components";
 
 function App() {
   return (
@@ -8,10 +8,9 @@ function App() {
       <Header />
       <div className="app__body">
         <Sidebar />
+        <Feed />
+        <Widget />
       </div>
-
-      {/* Feed */}
-      {/* Widget */}
     </div>
   );
 }

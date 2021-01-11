@@ -63,4 +63,33 @@
       }
     }
   }
+
+  .sidebar__bottom {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid lightgray;
+    background: white;
+    border-radius: 10px;
+    margin-top: 10px;
+
+    .sidebar__recentItem {
+      color: gray;
+      cursor: pointer;
+      display: flex;
+      font-size: 0.8rem;
+      font-weight: bolder;
+      margin-bottom: 5px;
+      padding: 5px;
+
+      &:hover {
+        background-color: whitesmoke;
+        border-radius: 10px;
+        color: black;
+      }
+
+      .sidebar__hash {
+        margin: 0 5px;
+      }
+    }
+  }
 }

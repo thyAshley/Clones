@@ -3,12 +3,20 @@ import { Avatar } from "@material-ui/core";
 import "./styles.scss";
 
 const Sidebar = () => {
+  const recentItem = (topic: string) => {
+    return (
+      <div className="sidebar__recentItem">
+        <span className="sidebar__hash">#</span>
+        <p>{topic}</p>
+      </div>
+    );
+  };
   return (
     <div className="sidebar">
       <div className="sidebar__top">
         <img
           className="sidebar__top__bg"
-          src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHw%3D&w=1000&q=80"
+          src="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fjosephliu%2Ffiles%2F2019%2F06%2F1-office-1516329_1920-1200x299.jpg"
           alt="background"
         />
         <Avatar className="sidebar__avatar" src="/images/avatar.png" />
@@ -29,6 +37,11 @@ const Sidebar = () => {
 
       <div className="sidebar__bottom">
         <p>Recent</p>
+        {recentItem("lorem")}
+        {recentItem("ipsum")}
+        {recentItem("dolor")}
+        {recentItem("sit")}
+        {recentItem("amet")}
       </div>
     </div>
   );
