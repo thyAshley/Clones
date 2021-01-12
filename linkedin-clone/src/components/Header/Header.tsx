@@ -7,10 +7,20 @@ import {
   Chat,
   Notifications,
 } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
+
 import "./styles.scss";
+
 import HeaderOption from "../HeaderOption/HeaderOption";
+import { logout } from "../../redux/users/userSlice";
+import { auth } from "../db";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(logout());
+    auth.signOut();
+  };
   return (
     <div className="header">
       <div className="header__left">
@@ -23,7 +33,7 @@ const Header = () => {
           <input type="text" placeholder="Search" />
         </div>
       </div>
-      <div className="header__right">
+      <div className="header__right" onClick={logoutHandler}>
         <HeaderOption Icon={Home} title="Home" />
         <HeaderOption Icon={SupervisorAccount} title="My Network" />
         <HeaderOption Icon={BusinessCenter} title="Jobs" />

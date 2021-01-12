@@ -5,4 +5,5 @@ export interface HeaderOptionProps {
   avatar?: string;
   title?: string;
   Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
+  onClick?: () => void;
 }
