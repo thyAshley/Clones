@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 type userAttribute = {
   user: null;
@@ -20,7 +20,5 @@ export const userSlice = createSlice({
 });
 
 export const { login, logout } = userSlice.actions;
-
-export const selectUser = (state: userAttribute) => state.user;
 
 export default userSlice.reducer;
