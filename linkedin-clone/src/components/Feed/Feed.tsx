@@ -14,8 +14,11 @@ import InputOption from "../InputOption/InputOption";
 import Post from "../Post/Post";
 import { db } from "../db";
 import { postAttribute } from "./post_types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Feed = () => {
+  const { user } = useSelector((state: RootState) => state.userReducer);
   const [posts, setPosts] = useState<postAttribute[]>([]);
   const [text, setText] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,8 +40,8 @@ const Feed = () => {
   const sendPost = (e: React.MouseEvent) => {
     e.preventDefault();
     db.collection("posts").add({
-      name: "Tester",
-      description: "This is a test",
+      name: user!.displayName,
+      description: user!.email,
       message: text,
       photoURL: "Test",
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),

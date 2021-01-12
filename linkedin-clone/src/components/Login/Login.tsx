@@ -41,8 +41,24 @@ const Login = () => {
     }
   };
 
-  const loginHandler = (e: React.MouseEvent) => {
+  const loginHandler = async (e: React.MouseEvent) => {
     e.preventDefault();
+    try {
+      const user = (await auth.signInWithEmailAndPassword(email, password))
+        .user;
+      if (user) {
+        dispatch(
+          login({
+            email: user.email,
+            uid: user.uid,
+            displayName: user?.displayName,
+            photoURL: user?.photoURL,
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="login">

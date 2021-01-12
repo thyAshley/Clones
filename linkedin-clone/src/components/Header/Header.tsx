@@ -7,15 +7,17 @@ import {
   Chat,
   Notifications,
 } from "@material-ui/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./styles.scss";
 
 import HeaderOption from "../HeaderOption/HeaderOption";
 import { logout } from "../../redux/users/userSlice";
 import { auth } from "../db";
+import { RootState } from "../../redux/store";
 
 const Header = () => {
+  const { user } = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(logout());
@@ -24,10 +26,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__left">
-        <img
-          src="https://www.flaticon.com/svg/static/icons/svg/174/174857.svg"
-          alt="LinkedIn"
-        />
+        <img src={user?.photoURL} alt="LinkedIn" />
         <div className="header__search">
           <Search />
           <input type="text" placeholder="Search" />

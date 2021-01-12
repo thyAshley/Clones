@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type userAttribute = {
-  user: null;
+  user: null | {
+    displayName: string;
+    email: string;
+    photoURL: string;
+  };
 };
 
 const initialState: userAttribute = { user: null };
