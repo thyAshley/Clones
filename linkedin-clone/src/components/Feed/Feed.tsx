@@ -21,14 +21,17 @@ const Feed = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) =>
-      setPosts(
-        snapshot.docs.map((doc: any) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
-      )
-    );
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .limit(10)
+      .onSnapshot((snapshot) =>
+        setPosts(
+          snapshot.docs.map((doc: any) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
   }, []);
 
   const sendPost = (e: React.MouseEvent) => {
