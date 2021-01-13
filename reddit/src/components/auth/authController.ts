@@ -53,7 +53,7 @@ export const login = async (req: Request, res: Response) => {
     );
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 3600,
     });
@@ -63,18 +63,18 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const me = async (req: Request, res: Response) => {
+export const logout = async (req: Request, res: Response) => {
   try {
-    const token = req.cookies.token;
-    console.log(token);
-    if (!token) {
-      throw new Error("Unauthenticated");
-    }
-    const { username, id }: any = jwt.verify(token, process.env.JWTSECRET);
-    const user = await User.findOne({ username });
-    if (!user) throw new Error("Unauthenticated");
-    return res.json(user);
+    res.cookie("token", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+    res.status(200).json({ success: true });
   } catch (error) {
-    return res.status(401).json({ error: error.message });
+    console.log(error);
   }
+};
+
+export const me = async (req: Request, res: Response) => {
+  return res.json(res.locals.user);
 };

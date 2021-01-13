@@ -1,11 +1,12 @@
 import { Router } from "express";
-import trim from "../../middleware/trim";
 
-import { login, register, me } from "./authController";
+import { login, register, me, logout } from "./authController";
+import { authMiddleware, trimMiddleware } from "../../middleware";
 
 const router = Router();
 
-router.route("/").post(trim, register).get(me);
-router.post("/login", trim, login);
+router.route("/").post(trimMiddleware, register).get(authMiddleware, me);
+router.post("/login", trimMiddleware, login);
+router.get("/logout", logout);
 
 export default router;
