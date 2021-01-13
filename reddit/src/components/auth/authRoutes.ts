@@ -1,9 +1,11 @@
 import express, { Router } from "express";
+import trim from "../../middleware/trim";
 
-import { register } from "./authController";
+import { login, register } from "./authController";
 
 const router = express.Router();
 
-router.post("/", register);
+router.post("/", trim, register);
+router.post("/login", trim, login);
 
 export default router;
