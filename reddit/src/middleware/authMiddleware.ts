@@ -6,7 +6,7 @@ import { User } from "../entity/User";
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.cookies.token;
-    console.log(token);
+
     if (!token) {
       throw new Error("Unauthenticated");
     }

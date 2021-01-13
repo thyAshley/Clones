@@ -1,16 +1,22 @@
+
 {
    "compilerOptions": {
-      "lib": [
-         "es5",
-         "es6"
-      ],
-      "target": "es5",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "outDir": "./build",
-      "emitDecoratorMetadata": true,
+     "module": "commonjs",
+     "esModuleInterop": true,
+     "target": "es6",
+     "noImplicitAny": true,
+     "moduleResolution": "node",
+     "sourceMap": true,
+     "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true,
-      "esModuleInterop": true
-   }
-}
+     "outDir": "dist",
+     "baseUrl": ".",
+     "paths": {
+       "*": ["node_modules/*"]
+     },
+     "typeRoots": ["@types", "./node_modules/@types"]
+   },
+   "include": ["src/**/*", "test/HoaxSubmit.spec.ts"]
+ }
+
+ 

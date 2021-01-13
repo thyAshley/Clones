@@ -7,6 +7,6 @@ const router = Router();
 
 router.route("/").post(trimMiddleware, register).get(authMiddleware, me);
 router.post("/login", trimMiddleware, login);
-router.get("/logout", logout);
+router.get("/logout", authMiddleware, logout);
 
 export default router;
