@@ -43,7 +43,7 @@ export class Sub extends BaseEntity {
   user: User;
 
   @OneToMany(() => Post, (post) => post.subName)
-  posts: Post;
+  post: Post;
 
   @CreateDateColumn()
   createdAt: Date;

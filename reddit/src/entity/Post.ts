@@ -8,11 +8,13 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   BeforeInsert,
+  OneToMany,
 } from "typeorm";
 
 import { User } from "./User";
 import { slugify, makeID } from "../components/post/postServices";
 import { Sub } from "./Sub";
+import { Comment } from "./Comment";
 
 @Entity("posts")
 export class Post extends BaseEntity {
@@ -53,9 +55,12 @@ export class Post extends BaseEntity {
   @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;
 
-  @ManyToOne(() => Sub, (sub) => sub.posts)
+  @ManyToOne(() => Sub, (sub) => sub.post)
   @JoinColumn({ name: "subName", referencedColumnName: "name" })
   sub: Sub;
+
+  @OneToMany(() => Comment, (comment) => comment.post)
+  comments: Comment[];
 
   @BeforeInsert()
   populateIdAndSlug() {
