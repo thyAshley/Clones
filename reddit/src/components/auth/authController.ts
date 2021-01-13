@@ -1,4 +1,4 @@
-import { validate } from "class-validator";
+import { equals, validate } from "class-validator";
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -60,5 +60,21 @@ export const login = async (req: Request, res: Response) => {
     return res.json({ user, token });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const me = async (req: Request, res: Response) => {
+  try {
+    const token = req.cookies.token;
+    console.log(token);
+    if (!token) {
+      throw new Error("Unauthenticated");
+    }
+    const { username, id }: any = jwt.verify(token, process.env.JWTSECRET);
+    const user = await User.findOne({ username });
+    if (!user) throw new Error("Unauthenticated");
+    return res.json(user);
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
   }
 };

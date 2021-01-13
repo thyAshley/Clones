@@ -10,7 +10,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => res.send("Hello World"));
 app.use("/api/v1/auth", authRouter);
 
 export default app;

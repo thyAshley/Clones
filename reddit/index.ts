@@ -6,8 +6,8 @@ import app from "./src/server";
 
 import { createConnection } from "typeorm";
 
-app.listen(3000, async () => {
-  console.log(`✔ Server started on port 3000`);
+app.listen(process.env.PORT, async () => {
+  console.log(`✔ Server started on port ${process.env.PORT}`);
   try {
     await createConnection();
     console.log("✔ Database connected");
