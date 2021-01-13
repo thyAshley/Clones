@@ -7,8 +7,12 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   JoinColumn,
+  BeforeInsert,
 } from "typeorm";
-import { User } from ".";
+
+import { User } from "./User";
+import { slugify, makeID } from "../components/post/postServices";
+import { Sub } from "./Sub";
 
 @Entity("posts")
 export class Post extends BaseEntity {
@@ -48,4 +52,14 @@ export class Post extends BaseEntity {
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;
+
+  @ManyToOne(() => Sub, (sub) => sub.posts)
+  @JoinColumn({ name: "subName", referencedColumnName: "name" })
+  sub: Sub;
+
+  @BeforeInsert()
+  populateIdAndSlug() {
+    this.identifier = makeID(6);
+    this.slug = slugify(this.title);
+  }
 }

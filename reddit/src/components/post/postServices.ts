@@ -1,10 +1,10 @@
 import crypto from "crypto";
 
 export const makeID = (length: number) => {
-  return crypto.randomBytes(length).toString("hex");
+  return crypto.randomBytes(length).toString("hex").substring(0, length);
 };
 
-export const stringToSlug = (str: string) => {
+export const slugify = (str: string) => {
   str = str
     .replace(/\s/g, "_")
     .trim()
