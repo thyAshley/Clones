@@ -5,9 +5,13 @@
      "esModuleInterop": true,
      "target": "es6",
      "noImplicitAny": true,
+     "strictNullChecks": true,
+     "strictFunctionTypes": true,
+     "strictBindCallApply": true,
      "moduleResolution": "node",
      "sourceMap": true,
      "emitDecoratorMetadata": true,
+     "resolveJsonModule": true,
       "experimentalDecorators": true,
      "outDir": "dist",
      "baseUrl": ".",
@@ -15,8 +19,7 @@
        "*": ["node_modules/*"]
      },
      "typeRoots": ["@types", "./node_modules/@types"]
-   },
-   "include": ["src/**/*", "test/HoaxSubmit.spec.ts"]
+   }
  }
 
  

@@ -5,7 +5,11 @@ import { User } from "../../entity";
 import { Sub } from "../../entity/Sub";
 
 export const createSub = async (req: Request, res: Response) => {
-  const { name, title, description } = req.body;
+  const {
+    name,
+    title,
+    description,
+  }: { name: string; title: string; description: string } = req.body;
 
   const user: User = res.locals.user;
 
@@ -16,16 +20,14 @@ export const createSub = async (req: Request, res: Response) => {
     if (isEmpty(description))
       errors.description = "Description must not be empty";
 
-    const existingSub = await getRepository(Sub)
-      .createQueryBuilder("subs")
-      .where("subs.name = :name", { name: name.toLowerCase() })
-      .getOne();
+    const existingSub = await Sub.find({ name });
+    console.log(existingSub);
 
-    if (existingSub) errors.name = "Sub already exists";
+    if (existingSub.length > 0) errors.name = "Sub already exists";
     if (Object.keys(errors).length > 0) throw errors;
 
     const sub = new Sub({
-      name,
+      name: name.toLowerCase(),
       description,
       title,
       user,
