@@ -1,3 +1,4 @@
+console.log(process.env.NODE_ENV === "dev");
 module.exports = {
   type: "postgres",
   host: "localhost",

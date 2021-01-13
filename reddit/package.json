@@ -5,8 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "start": "ts-node index.ts",
-    "dev": "set NODE_ENV=dev && nodemon --exec ts-node index.ts",
-    "test": "set NODE_ENV=test && jest --watchAll --detectOpenHandles"
+    "dev": "set NODE_ENV=dev&& nodemon --exec ts-node index.ts",
+    "test": "set NODE_ENV=test&& jest --watchAll --detectOpenHandles",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js"
   },
   "keywords": [],
   "author": "",

@@ -1,9 +1,9 @@
-import { equals, validate } from "class-validator";
+import { validate } from "class-validator";
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import { User } from "../../entity/User";
+import { User } from "../../entity";
 
 export const register = async (req: Request, res: Response) => {
   const { email, username, password } = req.body;

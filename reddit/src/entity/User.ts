@@ -8,9 +8,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
+  ManyToOne,
 } from "typeorm";
 import { classToPlain, Exclude } from "class-transformer";
 import bcrypt from "bcryptjs";
+import { Post } from "./Post";
 
 @Entity("users")
 export class User extends BaseEntity {
@@ -32,7 +34,6 @@ export class User extends BaseEntity {
   @IsEmail()
   email: string;
 
-  @Index()
   @Column()
   @MinLength(6)
   @Exclude()
@@ -52,4 +53,7 @@ export class User extends BaseEntity {
   toJSON() {
     return classToPlain(this);
   }
+
+  @ManyToOne(() => Post, (post) => post.user)
+  posts: Post[];
 }
