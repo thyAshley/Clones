@@ -32,17 +32,17 @@ export default function Register() {
             <div className="mb-2">
               <input
                 type="email"
-                className="w-full px-3 py-2 mt-5 mb-2 bg-gray-100 border-2 border-gray-300 rounded "
+                className="w-full px-3 py-2 mt-5 mb-2 border-2 border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white"
                 placeholder="Email"
               />
               <input
                 type="text"
-                className="w-full px-3 py-2 mb-2 bg-gray-100 border-2 border-gray-300 rounded "
+                className="w-full px-3 py-2 mb-2 border-2 border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white"
                 placeholder="Username"
               />
               <input
                 type="password"
-                className="w-full px-3 py-2 bg-gray-100 border-2 border-gray-300 rounded "
+                className="w-full px-3 py-2 border-2 border-gray-300 rounded outline-none bg-gray-50 focus:bg-white hover:bg-white"
                 placeholder="Password"
               />
             </div>
