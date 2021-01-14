@@ -1,9 +1,19 @@
-import { validate } from "class-validator";
+import { validate, ValidationError } from "class-validator";
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import { User } from "../../entity";
+
+const mapErrors = (validationError: ValidationError[]) => {
+  let errors: { [key: string]: string } = {};
+  validationError.map((err) => {
+    const value = err.constraints![Object.keys(err.constraints!)[0]];
+    const property = err.property;
+    errors[property] = value;
+  });
+  return errors;
+};
 
 export const register = async (req: Request, res: Response) => {
   const { email, username, password } = req.body;
@@ -20,9 +30,8 @@ export const register = async (req: Request, res: Response) => {
 
     let validationError = await validate(user);
     if (validationError.length > 0) {
-      return res.status(400).json({ errors });
+      return res.status(400).json(mapErrors(validationError));
     }
-
     await user.save();
     return res.json(user);
   } catch (error) {
@@ -36,15 +45,11 @@ export const login = async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({ username });
     if (!user) {
-      return res
-        .status(404)
-        .json({ error: "Invalid username and/or username" });
+      return res.status(404).json({ username: "User not found" });
     }
     const matches = await bcrypt.compare(password, user.password);
     if (!matches) {
-      return res
-        .status(401)
-        .json({ error: "Invalid username and/or username" });
+      return res.status(401).json({ password: "Invalid password" });
     }
 
     const token = jwt.sign(

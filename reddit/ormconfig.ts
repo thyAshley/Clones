@@ -4,7 +4,8 @@ module.exports = {
   port: 5432,
   username: "postgres",
   password: "test123",
-  database: process.env.NODE_ENV === "dev" ? "redditClone" : "redditCloneTest",
+  database:
+    process.env.NODE_ENV === "development" ? "redditClone" : "redditCloneTest",
   synchronize: false,
   logging: true,
   entities: ["src/entity/**/*.ts"],

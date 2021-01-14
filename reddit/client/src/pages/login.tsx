@@ -7,19 +7,16 @@ import { useRouter } from "next/router";
 import styles from "../styles/register.module.scss";
 import InputGroup from "../components/InputGroup";
 
-export default function Register() {
+export default function Login() {
   const [username, setUser] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [agreement, setAgreement] = useState<boolean>(false);
   const [errors, setErrors] = useState<any>({});
   const router = useRouter();
 
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("/auth", {
-        email,
+      await axios.post("/auth/login", {
         password,
         username,
       });
@@ -31,39 +28,18 @@ export default function Register() {
   return (
     <div className="flex">
       <Head>
-        <title>Register</title>
+        <title>Login</title>
       </Head>
 
       <div className={`w-36 h-screen ${styles.register__image} bg-cover`}></div>
       <div className="flex flex-col justify-center pl-6">
         <div className="w-72">
-          <h1 className="mb-2 text-lg font-medium">Sign up</h1>
+          <h1 className="mb-2 text-lg font-medium">Login</h1>
           <p className="mb-10 text-xs">
             By continuing, you agree to our User Agreement and Privacy Policy
           </p>
 
           <form onSubmit={submitFormHandler}>
-            <div className="flex items-center mb-5">
-              <input
-                type="checkbox"
-                className="w-4 h-4 mr-1 cursor-pointer"
-                id="agreement"
-                checked={agreement}
-                onChange={({ target }) => setAgreement(target.checked)}
-              />
-              <label htmlFor="agreement" className="text-xs cursor-pointer">
-                I <span className="text-blue-600">agree</span> to get emails
-                from RedditClone
-              </label>
-            </div>
-            <InputGroup
-              error={errors.email}
-              className="mb-2"
-              value={email}
-              setValue={setEmail}
-              placeholder="Email"
-              type="email"
-            />
             <InputGroup
               error={errors.username}
               className="mb-2"
@@ -82,17 +58,16 @@ export default function Register() {
             />
 
             <button
-              className={`w-full py-2 mb-4 text-xs font-bold text-white uppercase bg-blue-500 rounded ${styles.register__button}`}
-              disabled={!agreement}
+              className={`w-full py-2 mb-4 text-xs font-bold text-white uppercase bg-blue-500 rounded`}
             >
-              Sign Up
+              Login
             </button>
           </form>
         </div>
         <small>
-          Already a user?
-          <Link href="/login">
-            <a className="ml-1 text-blue-500 uppercase">Log In</a>
+          Don't have an account?
+          <Link href="/register">
+            <a className="ml-1 text-blue-500 uppercase">Sign Up</a>
           </Link>
         </small>
       </div>
