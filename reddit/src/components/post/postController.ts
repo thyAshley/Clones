@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Sub } from "../../entity/Sub";
 import { Post } from "../../entity/index";
+import { Comment } from "../../entity/Comment";
 
 export const createPost = async (req: Request, res: Response) => {
   const { title, body, sub } = req.body;
@@ -41,13 +42,40 @@ export const getPosts = async (req: Request, res: Response) => {
 export const getPost = async (req: Request, res: Response) => {
   const { identifier, slug } = req.params;
   try {
-    const post = await Post.findOneOrFail({
-      identifier,
-      slug,
-    });
+    const post = await Post.findOneOrFail(
+      {
+        identifier,
+        slug,
+      },
+      {
+        relations: ["sub"],
+      }
+    );
     return res.json(post);
   } catch (error) {
     console.log(error);
     return res.status(404).json({ error: "Post not found!" });
+  }
+};
+
+export const addCommentsToPost = async (req: Request, res: Response) => {
+  const body = req.body.body as string;
+  if (!body) {
+    return res.status(400).json({ error: "Missing content" });
+  }
+  const { identifier, slug } = req.params;
+  try {
+    const post = await Post.findOneOrFail({ identifier, slug });
+    console.log(post);
+    const comment = new Comment({
+      body: body || "",
+      user: res.locals.user,
+      post,
+    });
+    await comment.save();
+    return res.json(comment);
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({ error: "Post not found" });
   }
 };
