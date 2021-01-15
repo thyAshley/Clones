@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .button {
+    @apply inline-block text-xs font-bold text-center uppercase border rounded;
+  }
+  .blue {
+    @apply text-white bg-blue-500 border-blue-500;
+  }
+  .blue:hover {
+    @apply bg-blue-300 border-blue-300;
+  }
+
+  .blue-hollow {
+    @apply text-blue-500 bg-transparent border-blue-500;
+  }
+
+  .blue-hollow:hover {
+    @apply border-blue-300;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

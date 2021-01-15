@@ -23,13 +23,13 @@ export default function Register() {
         password,
         username,
       });
-      router.push("/");
+      router.push("/login");
     } catch (error) {
       setErrors(error.response.data);
     }
   };
   return (
-    <div className="flex">
+    <div className="flex bg-white">
       <Head>
         <title>Register</title>
       </Head>

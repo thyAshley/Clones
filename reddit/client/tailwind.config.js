@@ -6,6 +6,7 @@ module.exports = {
       body: ["IBM Plex Sans"],
     },
     extend: {
+      backgroundColor: ["active"],
       colors: {
         blue: {
           100: "#cce4f6",
@@ -18,6 +19,9 @@ module.exports = {
           800: "#003054",
           900: "#00182a",
         },
+      },
+      spacing: {
+        140: "40rem",
       },
     },
   },
