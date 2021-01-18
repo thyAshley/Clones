@@ -9,10 +9,12 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   ManyToOne,
+  OneToMany,
 } from "typeorm";
 import { classToPlain, Exclude } from "class-transformer";
 import bcrypt from "bcryptjs";
 import { Post } from "./Post";
+import { Vote } from "./Vote";
 
 @Entity("users")
 export class User extends BaseEntity {
@@ -57,4 +59,7 @@ export class User extends BaseEntity {
 
   @ManyToOne(() => Post, (post) => post.user)
   posts: Post[];
+
+  @OneToMany(() => Vote, (vote) => vote.user)
+  votes: Vote[];
 }

@@ -9,8 +9,11 @@ import {
   ManyToOne,
   JoinColumn,
   BeforeInsert,
+  OneToMany,
 } from "typeorm";
 import { Post, User } from ".";
+import { Vote } from "./Vote";
+import { Exclude } from "class-transformer";
 
 @Entity("comments")
 export class Comment extends BaseEntity {
@@ -45,6 +48,10 @@ export class Comment extends BaseEntity {
 
   @ManyToOne(() => Post, (post) => post.comments)
   post: Post;
+
+  @Exclude()
+  @OneToMany(() => Vote, (vote) => vote.comment)
+  vote: Vote[];
 
   @BeforeInsert()
   makeId() {

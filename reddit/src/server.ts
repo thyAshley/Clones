@@ -6,6 +6,7 @@ import cors from "cors";
 import authRouter from "./components/auth/authRoutes";
 import postRouter from "./components/post/postRoutes";
 import subRouter from "./components/subs/subRoutes";
+import voteRouter from "./components/vote/voteRoutes";
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use(
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/subs", subRouter);
+app.use("/api/v1/vote", voteRouter);
 
 export default app;

@@ -17,6 +17,7 @@ import { slugify, makeID } from "../components/post/postServices";
 import { Sub } from "./Sub";
 import { Comment } from "./Comment";
 import { Expose } from "class-transformer";
+import { Vote } from "./Vote";
 
 @Entity("posts")
 export class Post extends BaseEntity {
@@ -72,6 +73,9 @@ export class Post extends BaseEntity {
   createFields() {
     this.url = `/r/${this.subName}/${this.identifier}/${this.slug}`;
   }
+
+  @OneToMany(() => Vote, (vote) => vote.comment)
+  votes: Vote[];
 
   @BeforeInsert()
   populateIdAndSlug() {
