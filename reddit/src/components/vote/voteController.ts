@@ -39,6 +39,12 @@ export const vote = async (req: Request, res: Response) => {
       await vote.save();
     }
 
+    post = await Post.findOneOrFail(
+      { identifier, slug },
+      { relations: ["comments", "comments.vote", "sub", "votes"] }
+    );
+    post.setUserVote(user);
+    post.comments.forEach((comment) => comment.setUserVote(user));
     return res.json(post);
   } catch (error) {
     console.log(error);

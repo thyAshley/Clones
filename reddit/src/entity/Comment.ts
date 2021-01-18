@@ -53,6 +53,15 @@ export class Comment extends BaseEntity {
   @OneToMany(() => Vote, (vote) => vote.comment)
   vote: Vote[];
 
+  protected userVote: number;
+
+  setUserVote(user: User) {
+    const index = this.vote
+      ? this.vote.findIndex((v) => v.username === user.username)
+      : -1;
+    this.userVote = index > -1 ? this.vote[index].value : 0;
+  }
+
   @BeforeInsert()
   makeId() {
     this.identifier = makeID(12);

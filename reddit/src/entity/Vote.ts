@@ -33,6 +33,9 @@ export class Vote extends BaseEntity {
   @Column()
   value: number;
 
+  @Column({ nullable: true })
+  test: string;
+
   @ManyToOne(() => User)
   @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;

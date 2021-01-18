@@ -16,7 +16,7 @@ import { User } from "./User";
 import { slugify, makeID } from "../components/post/postServices";
 import { Sub } from "./Sub";
 import { Comment } from "./Comment";
-import { Expose } from "class-transformer";
+import { Exclude, Expose } from "class-transformer";
 import { Vote } from "./Vote";
 
 @Entity("posts")
@@ -69,12 +69,36 @@ export class Post extends BaseEntity {
   comments: Comment[];
 
   protected url: string;
+  protected commentCount: number;
+  protected voteScore: number;
+  protected userVote: number;
+
+  setUserVote(user: User) {
+    const index = this.votes
+      ? this.votes.findIndex((vote) => vote.username === user.username)
+      : -1;
+    this.userVote = index > -1 ? this.votes[index].value : 0;
+  }
+
   @AfterLoad()
   createFields() {
     this.url = `/r/${this.subName}/${this.identifier}/${this.slug}`;
   }
 
-  @OneToMany(() => Vote, (vote) => vote.comment)
+  @AfterLoad()
+  count() {
+    this.commentCount = this.comments ? this.comments.length : 0;
+  }
+
+  @AfterLoad()
+  totalVote() {
+    this.voteScore = this.votes
+      ? this.votes.reduce((prev, current) => prev + (current.value || 0), 0)
+      : 0;
+  }
+
+  @Exclude()
+  @OneToMany(() => Vote, (vote) => vote.post)
   votes: Vote[];
 
   @BeforeInsert()
