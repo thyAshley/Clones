@@ -9,12 +9,14 @@ import {
   JoinColumn,
   BeforeInsert,
   OneToMany,
+  AfterLoad,
 } from "typeorm";
 
 import { User } from "./User";
 import { slugify, makeID } from "../components/post/postServices";
 import { Sub } from "./Sub";
 import { Comment } from "./Comment";
+import { Expose } from "class-transformer";
 
 @Entity("posts")
 export class Post extends BaseEntity {
@@ -45,6 +47,9 @@ export class Post extends BaseEntity {
   @Column()
   subName: string;
 
+  @Column()
+  username: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
@@ -61,6 +66,12 @@ export class Post extends BaseEntity {
 
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[];
+
+  protected url: string;
+  @AfterLoad()
+  createFields() {
+    this.url = `/r/${this.subName}/${this.identifier}/${this.slug}`;
+  }
 
   @BeforeInsert()
   populateIdAndSlug() {
