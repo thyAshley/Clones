@@ -1,27 +1,28 @@
-import { AppProps } from 'next/app'
-import Axios from 'axios'
-import { Fragment } from 'react'
-import { useRouter } from 'next/router'
+import { AppProps } from "next/app";
+import Axios from "axios";
+import { Fragment } from "react";
+import { useRouter } from "next/router";
 
-import '../styles/tailwind.css'
-import '../styles/icons.css'
+import "../styles/tailwind.css";
+import "../styles/icons.css";
 
-import Navbar from '../components/Navbar'
+import Navbar from "../components/Navbar";
+import { AuthProvider } from "../context/authContext";
 
-Axios.defaults.baseURL = 'http://localhost:5000/api'
-Axios.defaults.withCredentials = true
+Axios.defaults.baseURL = "http://localhost:5000/api";
+Axios.defaults.withCredentials = true;
 
 function App({ Component, pageProps }: AppProps) {
-  const { pathname } = useRouter()
-  const authRoutes = ['/register', '/login']
-  const authRoute = authRoutes.includes(pathname)
+  const { pathname } = useRouter();
+  const authRoutes = ["/register", "/login"];
+  const authRoute = authRoutes.includes(pathname);
 
   return (
-    <Fragment>
+    <AuthProvider>
       {!authRoute && <Navbar />}
       <Component {...pageProps} />
-    </Fragment>
-  )
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
