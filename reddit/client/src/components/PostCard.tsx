@@ -1,24 +1,24 @@
-import Link from 'next/link'
-import { Fragment } from 'react'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import classNames from 'classnames'
+import Link from "next/link";
+import { Fragment } from "react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import classNames from "classnames";
 
-import { Post } from '../types'
-import Axios from 'axios'
+import { Post } from "../types";
+import Axios from "axios";
 
-dayjs.extend(relativeTime)
+dayjs.extend(relativeTime);
 
 const ActionButton = ({ children }) => {
   return (
     <div className="px-1 py-1 mr-1 text-xs text-gray-400 rounded cursor-pointer hover:bg-gray-200">
       {children}
     </div>
-  )
-}
+  );
+};
 
 interface PostCardProps {
-  post: Post
+  post: Post;
 }
 
 export default function PostCard({
@@ -38,17 +38,17 @@ export default function PostCard({
 }: PostCardProps) {
   const vote = async (value) => {
     try {
-      const res = await Axios.post('/misc/vote', {
+      const res = await Axios.post("/misc/vote", {
         identifier,
         slug,
         value,
-      })
+      });
 
-      console.log(res.data)
+      console.log(res.data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <div key={identifier} className="flex mb-4 bg-white rounded">
@@ -60,8 +60,8 @@ export default function PostCard({
           onClick={() => vote(1)}
         >
           <i
-            className={classNames('icon-arrow-up', {
-              'text-red-500': userVote === 1,
+            className={classNames("icon-arrow-up", {
+              "text-red-500": userVote === 1,
             })}
           ></i>
         </div>
@@ -72,8 +72,8 @@ export default function PostCard({
           onClick={() => vote(-1)}
         >
           <i
-            className={classNames('icon-arrow-down', {
-              'text-blue-600': userVote === -1,
+            className={classNames("icon-arrow-down", {
+              "text-blue-600": userVote === -1,
             })}
           ></i>
         </div>
@@ -82,15 +82,15 @@ export default function PostCard({
       <div className="w-full p-2">
         <div className="flex items-center">
           <Link href={`/r/${subName}`}>
-            <Fragment>
-              <img
-                src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-                className="w-6 h-6 mr-1 rounded-full cursor-pointer"
-              />
-              <a className="text-xs font-bold cursor-pointer hover:underline">
-                /r/{subName}
-              </a>
-            </Fragment>
+            <img
+              src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+              className="w-6 h-6 mr-1 rounded-full cursor-pointer"
+            />
+          </Link>
+          <Link href={`/r/${subName}`}>
+            <a className="text-xs font-bold cursor-pointer hover:underline">
+              /r/{subName}
+            </a>
           </Link>
           <p className="text-xs text-gray-500">
             <span className="mx-1">•</span>
@@ -130,5 +130,5 @@ export default function PostCard({
         </div>
       </div>
     </div>
-  )
+  );
 }

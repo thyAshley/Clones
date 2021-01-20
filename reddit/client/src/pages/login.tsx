@@ -5,7 +5,7 @@ import Axios from "axios";
 import { useRouter } from "next/router";
 
 import InputGroup from "../components/InputGroup";
-import { useAuthDispatch } from "../context/authContext";
+import { useAuthDispatch, useAuthState } from "../context/authContext";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -13,8 +13,11 @@ export default function Register() {
   const [errors, setErrors] = useState<any>({});
 
   const dispatch = useAuthDispatch();
+  const { authenticated } = useAuthState();
 
   const router = useRouter();
+
+  if (authenticated) router.push("/");
 
   const submitForm = async (event: FormEvent) => {
     event.preventDefault();
