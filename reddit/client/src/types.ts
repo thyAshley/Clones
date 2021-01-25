@@ -36,3 +36,13 @@ export interface Subs {
   posts: Post[];
   postcount?: number;
 }
+
+export interface Comment {
+  createdAt: string;
+  updatedAt: string;
+  identifier: string;
+  body: string;
+  username: string;
+  voteScore: number;
+  userVote: number;
+}
