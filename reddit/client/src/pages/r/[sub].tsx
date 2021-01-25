@@ -10,6 +10,7 @@ import { useAuthState } from "../../context/authContext";
 import classNames from "classnames";
 import { ChangeEvent } from "react";
 import Axios from "axios";
+import Sidebar from "../../components/Sidebar";
 
 const Sub = () => {
   const [ownSub, setOwnSub] = useState(false);
@@ -124,6 +125,7 @@ const Sub = () => {
           </div>
           <div className="container flex pt-5">
             <div className="w-160">{markup}</div>
+            <Sidebar sub={sub} />
           </div>
         </>
       )}
