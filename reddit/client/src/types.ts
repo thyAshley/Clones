@@ -5,6 +5,7 @@ export interface Post {
   slug: string;
   subName: string;
   username: string;
+  sub?: Subs;
   createdAt: string;
   updatedAt: string;
   // Virtual fields
