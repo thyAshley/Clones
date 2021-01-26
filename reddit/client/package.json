@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/classnames": "^2.2.11",
     "autoprefixer": "^10.0.4",
     "axios": "^0.21.0",
     "dayjs": "^1.9.7",
