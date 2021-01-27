@@ -87,8 +87,8 @@ const Navbar: React.FC = () => {
                     className="mr-4 overflow-hidden rounded-full"
                     src={sub.imageUrl}
                     alt="Sub"
-                    height={(8 * 16) / 4}
-                    width={(8 * 16) / 4}
+                    height={30}
+                    width={30}
                   />
                 </div>
                 <div className="ml-4 text-sm">
