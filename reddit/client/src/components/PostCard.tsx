@@ -7,11 +7,15 @@ import classNames from "classnames";
 import { Post } from "../types";
 import Axios from "axios";
 import ActionButton from "./ActionButton";
+import { useAuthState } from "../context/authContext";
+import { useRouter } from "next/router";
+import { log } from "console";
 
 dayjs.extend(relativeTime);
 
 interface PostCardProps {
   post: Post;
+  revalidate?: any;
 }
 
 export default function PostCard({
@@ -28,16 +32,25 @@ export default function PostCard({
     url,
     username,
   },
+  revalidate,
 }: PostCardProps) {
+  const { authenticated } = useAuthState();
+  const router = useRouter();
+
   const vote = async (value) => {
+    if (!authenticated) router.push("/login");
+
+    if (value === userVote) value = 0;
     try {
       const res = await Axios.post("/misc/vote", {
         identifier,
         slug,
         value,
       });
-
-      console.log(res.data);
+      if (res.data) {
+        if (revalidate) revalidate();
+      }
+      console.log("revalidated");
     } catch (err) {
       console.log(err);
     }
