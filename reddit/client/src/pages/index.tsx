@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import useSWR from "swr";
+import { Fragment, useEffect, useState } from "react";
+import useSWR, { useSWRInfinite } from "swr";
 import Head from "next/head";
 import Image from "next/image";
 import dayjs from "dayjs";
@@ -13,10 +13,44 @@ import { useAuthState } from "../context/authContext";
 dayjs.extend(relativeTime);
 
 export default function Home() {
-  const { data: posts } = useSWR<Post[]>("/posts");
+  const [observer, setObserver] = useState("");
+
   const { data: topSubs } = useSWR<Subs[]>("/misc/top-subs");
 
   const { authenticated } = useAuthState();
+
+  const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite<
+    Post[]
+  >((index) => `/posts?page=${index}`);
+  const posts = data ? [].concat(...data) : [];
+  const isLoadingInitialData = !data && !error;
+
+  useEffect(() => {
+    if (!posts || posts.length === 0) return;
+    const id = posts[posts.length - 1].identifier;
+
+    if (id !== observer) {
+      setObserver(id);
+      observePost(document.getElementById(id));
+    }
+  }, [posts]);
+
+  const observePost = (el: HTMLElement) => {
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        console.log(entries);
+        if (entries[0].isIntersecting === true) {
+          console.log("Reached bottom of page");
+          observer.unobserve(el);
+          setSize(size + 1);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    observer.observe(el);
+  };
 
   return (
     <Fragment>

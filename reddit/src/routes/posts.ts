@@ -29,11 +29,15 @@ const createPost = async (req: Request, res: Response) => {
   }
 };
 
-const getPosts = async (_: Request, res: Response) => {
+const getPosts = async (req: Request, res: Response) => {
+  const currentPage: number = (req.query.page || 0) as number;
+  const limit: number = (req.query.limit || 8) as number;
   try {
     const posts = await Post.find({
       order: { createdAt: "DESC" },
       relations: ["comments", "votes", "sub"],
+      skip: currentPage * limit,
+      take: limit,
     });
 
     if (res.locals.user) {
@@ -49,6 +53,7 @@ const getPosts = async (_: Request, res: Response) => {
 
 const getPost = async (req: Request, res: Response) => {
   const { identifier, slug } = req.params;
+
   try {
     const post = await Post.findOneOrFail(
       { identifier, slug },
