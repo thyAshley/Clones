@@ -4,12 +4,14 @@ import Document, {
   Main,
   NextScript,
   DocumentContext,
-} from 'next/document'
+} from "next/document";
 
+const description = "This is a clone of reddit";
+const title = "Reddit Clone";
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
   }
 
   render() {
@@ -27,14 +29,28 @@ class MyDocument extends Document {
             integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
             crossOrigin="anonymous"
           />
+          <link rel="icon" type="image/svg+xml" href="/images/reddit.svg" />
+          <meta name="description" content={description} />
+          <meta property="og:description" content={description} />
+          <meta property="twitter:description" content={description} />
+          <meta property="og:title" content={title} />
+          <meta property="twitter:title" content={title} />
+          <meta property="og:site_name" content="Clonedit" />
+          <meta property="og:image" content="Clonedit" />
+          {/* <meta property="twitter:site_name" content="@Clonedit"/> */}
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:image"
+            content={`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/reddit.svg`}
+          />
         </Head>
-        <body className="font-body" style={{ backgroundColor: '#DAE0E6' }}>
+        <body className="font-body" style={{ backgroundColor: "#DAE0E6" }}>
           <Main />
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-export default MyDocument
+export default MyDocument;

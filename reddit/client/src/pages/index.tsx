@@ -46,7 +46,6 @@ export default function Home() {
     if (!el) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log(entries);
         if (entries[0].isIntersecting === true) {
           console.log("Reached bottom of page");
           observer.unobserve(el);

@@ -39,7 +39,6 @@ export default function PostCard({
   const router = useRouter();
 
   const isInSubPage = router.pathname === "/r/[sub]";
-  console.log(router.pathname);
 
   const vote = async (value) => {
     if (!authenticated) router.push("/login");
